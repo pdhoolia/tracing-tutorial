@@ -1,0 +1,72 @@
+[project]
+name = "tracing-tutorial"
+version = "0.1.0"
+description = "Adding observability to your agentic solutions"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Pankaj Dhoolia", email = "pdhoolia@in.ibm.com" }
+]
+license = { text = "MIT" }
+keywords = ["langgraph", "opentelemetry", "tracing", "agents", "tutorial"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+dependencies = [
+  "langgraph-supervisor>=0.0.29",
+  "langgraph>=0.2.50",
+  "langchain-core>=0.3.10",
+  "langchain-openai>=0.2.5",
+  "opentelemetry-sdk>=1.26.0",
+  "opentelemetry-exporter-otlp>=1.26.0",
+  "opentelemetry-instrumentation>=0.47b0",
+  "openinference-instrumentation-langchain>=0.1.0",
+  "pydantic>=2.7.0",
+  "typing-extensions>=4.10.0",
+  "python-dotenv>=1.0.0",
+]
+
+[project.urls]
+repository = "https://github.com/phoolia/tracing-tutorial"
+
+[project.optional-dependencies]
+# Backends are optional; users can pick via env/config
+langsmith = ["langsmith>=0.1.80"]
+langfuse = ["langfuse>=2.52.0"]
+phoenix = ["arize-phoenix>=4.24.0"]
+
+[project.scripts]
+run-demo = "tracing_tutorial.scripts.run_demo:main"
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+index-url = "https://pypi.org/simple"
+
+[tool.uv.sources]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+  "pytest>=8.2.0",
+  "pytest-cov>=5.0.0",
+  "ruff>=0.5.0",
+  "mypy>=1.10.0",
+]
