@@ -66,6 +66,31 @@ The system supports switching between multiple tracing backends via the `TRACING
 
 #### Available Backends
 
+- **LangFuse**: Open-source LLM observability (uses OTLP at `/api/public/otel` endpoint)
+
+  ```bash
+  export TRACING_BACKEND=langfuse
+  export LANGFUSE_HOST=...  # e.g., http://localhost:3000 or https://cloud.langfuse.com
+  export LANGFUSE_PUBLIC_KEY=...
+  export LANGFUSE_SECRET_KEY=...
+  ```
+
+- **Phoenix**: Arize Phoenix for ML observability
+
+  ```bash
+  export TRACING_BACKEND=phoenix
+  export PHOENIX_ENDPOINT=http://localhost:6006
+  # For cloud: export PHOENIX_API_KEY=...
+  ```
+
+- **LangSmith**: LangChain's native tracing platform (uses OTLP at `/otel` endpoint)
+
+  ```bash
+  export TRACING_BACKEND=langsmith
+  export LANGSMITH_API_KEY=...
+  export LANGSMITH_ENDPOINT=...  # Defaults to https://api.smith.langchain.com
+  ```
+
 - **OTLP (default)**: Generic OTLP endpoint for any OpenTelemetry-compatible backend
 
   ```bash
@@ -80,35 +105,10 @@ The system supports switching between multiple tracing backends via the `TRACING
   - **OpenTelemetry Collector**: Can forward to multiple backends
   - **Commercial platforms**: Datadog, New Relic, Honeycomb, Dynatrace, etc.
 
-- **Console**: Prints spans to stdout for development (does not use OTLP)
+- **Console (default)**: Prints spans to stdout for development (does not use OTLP)
 
   ```bash
   export TRACING_BACKEND=console
-  ```
-
-- **LangSmith**: LangChain's native tracing platform (uses OTLP at `/otel` endpoint)
-
-  ```bash
-  export TRACING_BACKEND=langsmith
-  export LANGSMITH_API_KEY=...
-  export LANGSMITH_ENDPOINT=...  # Defaults to https://api.smith.langchain.com
-  ```
-
-- **LangFuse**: Open-source LLM observability (uses OTLP at `/api/public/otel` endpoint)
-
-  ```bash
-  export TRACING_BACKEND=langfuse
-  export LANGFUSE_HOST=...  # e.g., http://localhost:3000 or https://cloud.langfuse.com
-  export LANGFUSE_PUBLIC_KEY=...
-  export LANGFUSE_SECRET_KEY=...
-  ```
-
-- **Phoenix**: Arize Phoenix for ML observability (uses OTLP gRPC on port 4317 by default)
-
-  ```bash
-  export TRACING_BACKEND=phoenix
-  export PHOENIX_ENDPOINT=localhost:4317  # gRPC endpoint (no http://)
-  # For cloud: export PHOENIX_API_KEY=...
   ```
 
 ### Step 5: Set Up Local LangFuse (Optional Demo)

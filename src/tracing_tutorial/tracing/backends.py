@@ -124,8 +124,7 @@ def _setup_langsmith_otlp(provider: TracerProvider) -> None:
 def _setup_phoenix_otlp(provider: TracerProvider) -> None:
     """Configure OTLP export to Arize Phoenix."""
     # Phoenix can run locally or in cloud
-    # Default to local gRPC endpoint
-    endpoint = os.getenv("PHOENIX_ENDPOINT", "localhost:4317")
+    endpoint = os.getenv("PHOENIX_ENDPOINT", "http://localhost:6006")
     
     # Phoenix Cloud requires API key
     api_key = os.getenv("PHOENIX_API_KEY")
@@ -176,7 +175,7 @@ def configure_tracing(service_name: Optional[str] = None) -> trace.Tracer:
     Returns:
         Configured OpenTelemetry tracer
     """
-    backend = os.getenv("TRACING_BACKEND", "otlp").lower()
+    backend = os.getenv("TRACING_BACKEND", "console").lower()
     service = service_name or DEFAULT_SERVICE_NAME
     
     provider = _ensure_provider(service)
